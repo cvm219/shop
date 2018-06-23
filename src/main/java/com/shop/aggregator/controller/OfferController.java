@@ -36,17 +36,17 @@ public class OfferController {
             throw new RestException(400, "Product id not defined");
         }
         if (!productRepository.exists(offer.getProductId())) {
-            throw new RestException(404, "Product not exists");
+            throw new RestException(400, "Product not exists");
         }
         if (offer.getRetailerId() == null) {
             throw new RestException(400, "Retailer id not defined");
         }
         offer.setRetailer(retailerRepository.findOne(offer.getRetailerId()));
         if (offer.getRetailer() == null) {
-            throw new RestException(404, "Retailer not exists");
+            throw new RestException(400, "Retailer not exists");
         }
         if (offer.getPrice() == null || offer.getPrice() <= 0) {
-            throw new RestException(404, "Offer price less or equals zero");
+            throw new RestException(400, "Offer price less or equals zero");
         }
     }
     
