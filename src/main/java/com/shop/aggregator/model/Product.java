@@ -21,8 +21,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "products")
+@Table(name = Product.TABLE_NAME)
 public class Product implements Serializable {
+    
+    public static final String TABLE_NAME = "products";
     
     public static enum Statuses {
         enabled, disabled;
@@ -87,7 +89,7 @@ public class Product implements Serializable {
     }
 
     public Statuses getStatus() {
-        return Statuses.valueOf(status);
+        return status != null ? Statuses.valueOf(status) : null;
     }
 
     public void setStatus(Statuses status) {

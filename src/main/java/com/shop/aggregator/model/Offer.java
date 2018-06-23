@@ -20,16 +20,21 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "offers")
+@Table(name = Offer.TABLE_NAME)
 public class Offer implements Serializable {
+    
+    public static final String TABLE_NAME = "offers";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "retailer_id", nullable = false, referencedColumnName = "id")
+    @JsonIgnore
+    private transient UUID retailerId;
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "retailer_id", referencedColumnName = "id")
     private Retailer retailer;
     
     @Column(name = "product_id", nullable = false)
@@ -62,6 +67,14 @@ public class Offer implements Serializable {
         return id;
     }
 
+    public UUID getRetailerId() {
+        return retailerId;
+    }
+
+    public void setRetailerId(UUID retailerId) {
+        this.retailerId = retailerId;
+    }
+
     public Retailer getRetailer() {
         return retailer;
     }
@@ -69,7 +82,7 @@ public class Offer implements Serializable {
     public void setRetailer(Retailer retailer) {
         this.retailer = retailer;
     }
-
+    
     public UUID getProductId() {
         return productId;
     }

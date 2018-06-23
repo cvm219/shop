@@ -16,8 +16,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "retailers")
+@Table(name = Retailer.TABLE_NAME)
 public class Retailer implements Serializable {
+    
+    public static final String TABLE_NAME = "retailers";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

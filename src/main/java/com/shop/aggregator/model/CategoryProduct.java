@@ -10,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "category_products")
+@Table(name = CategoryProduct.TABLE_NAME)
 public class CategoryProduct implements Serializable {
+    
+    public static final String TABLE_NAME = "category_products";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
